@@ -7,7 +7,7 @@ public class BankApp {
 
     public static void main(String[] args) {
         while (true){
-            System.out.println("\n---Welcome to Zoho Bank---\n1. Create Bank Account\n2. Deposit\n3. Withdraw\n4. Check Balance\n5. Display Account Details\n6. Exit");
+            System.out.println("\n---Welcome to Zoho Bank---\n1. Create Bank Account\n2. Deposit\n3. Withdraw\n4. Check Balance\n5. Display Account Details & History\n6. Exit");
             System.out.print("Enter Your Choice: ");
 
             int choice=getValidIntInput();

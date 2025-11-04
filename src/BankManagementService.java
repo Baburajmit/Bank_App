@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -11,7 +10,7 @@ public class BankManagementService {
 
         do {
             generateAccountNumber= 1000000000L + (long)(Math.random() * 9000000000L);
-        }while (findAccount(generateAccountNumber).isPresent());
+        } while (findAccount(generateAccountNumber).isPresent());
 
         boolean exits = createAccountList.values().stream()
                 .anyMatch(a->a.getAccountHolderName().equals(name) && a.getAccountPinNumber() == pin);
@@ -43,6 +42,7 @@ public class BankManagementService {
         }
 
         acc.setBalance(acc.getBalance() + depositAmount);
+        acc.addTransaction("DEPOSIT",depositAmount);
         System.out.println("Deposit successful! Updated Balance: Rs. "+acc.getBalance());
     }
 
@@ -67,6 +67,7 @@ public class BankManagementService {
         }
 
         acc.setBalance(acc.getBalance() - withdrawAmount);
+        acc.addTransaction("WITHDRAW", withdrawAmount);
         System.out.println("Withdraw successful! Updated Balance: Rs. "+acc.getBalance());
     }
 
@@ -103,8 +104,10 @@ public class BankManagementService {
             return;
         }
 
-        System.out.println("\n---View Account Details---");
+        System.out.println("\n--- View Account Details ---");
         System.out.println(acc);
+        System.out.println("\n--- Transaction History ---");
+        acc.getTransactions().forEach(System.out::println);
     }
 
     public static Optional<CreateAccount> findAccount(long accountNumber){
